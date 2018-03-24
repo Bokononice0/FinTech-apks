@@ -1,8 +1,16 @@
 from sys import argv
 import os
 import csv
+from pathlib import Path
 
 def download_apk(apk_id):
+	# if apk already exists, then ignore
+	filename = "{0}.apk".format(apk_id)
+	path = Path(filename)
+	if path.is_file():
+		print("{0} already exists!".format(apk_id))
+		return
+	# else download
 	os.system("gplaycli --progress -d {0}".format(apk_id))
 
 def get_apk_ids(path):
